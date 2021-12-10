@@ -2,16 +2,6 @@ const fs = require('fs')
 
 const inputFile = "input.txt"
 
-function array_has_value(_array: number[], _value: number): boolean {
-    let result: boolean = false;
-    _array.forEach((element: number) => {
-        if(element === _value) {
-            result = true;
-        }
-    });
-    return result;
-}
-
 function find_key (_input: string[], value: number, result: number[]) {
     let input = _input;
     let keys: number[] = [];
@@ -24,14 +14,14 @@ function find_key (_input: string[], value: number, result: number[]) {
         }
     })
     if (keys.length === 0) {
-        if(!array_has_value(result, value)){
+        if(!result.find(e => e === value)){
             result.push(value)
         }
     } else {
         keys.forEach((_key: number) =>{
             find_key(_input, _key, result)
         })
-        if(!array_has_value(result, value)){
+        if(!result.find(e => e === value)){
             result.push(value)
         }
     }
@@ -53,12 +43,7 @@ function result (input: string[]) {
     if(result.length === 0) {
         console.log("ajajaj");
     } else {
-        //zabiju se
-        let result_str!: string;
-        result.forEach((element: number) => {
-            result_str = result_str + " " + String(element)
-        })
-        console.log("pujde to", result_str.replace("undefined", "").trim())
+        console.log("pujde to", result.join(" "))
     }
 }
 
